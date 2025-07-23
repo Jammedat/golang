@@ -36,7 +36,7 @@ go test -run TestFunctionName
 
 # Run tests with coverage analysis
 go test -cover
-
+```
 
 # Benchmarking in Go
 
