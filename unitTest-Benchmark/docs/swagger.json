@@ -1,0 +1,132 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is an API to serve car inventory applications",
+        "title": "CarInventory",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:3015",
+    "paths": {
+        "/cars": {
+            "post": {
+                "description": "Add a new car to the inventory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "cars"
+                ],
+                "summary": "Create a new car",
+                "parameters": [
+                    {
+                        "description": "Add car",
+                        "name": "cars",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Errors"
+                        }
+                    }
+                }
+            }
+        },
+        "/cars/{id}": {
+            "get": {
+                "description": "Get a car from the inventory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "cars"
+                ],
+                "summary": "Get a car",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "car id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Car"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.Errors"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.Errors"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Car": {
+            "type": "object",
+            "properties": {
+                "brand": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "year": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.Errors": {
+            "type": "object",
+            "properties": {
+                "details": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
